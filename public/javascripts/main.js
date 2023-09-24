@@ -43,22 +43,27 @@ const vuectrl = Vue.createApp({
         },
         
         doSearching() {
-            console.log("Search button clicked!");
-            let category = document.getElementById("cars").value;
-            let queryParam = "";
+            const searchQuery = document.getElementById("searchQuery").value;
+            const searchScope = document.getElementById("demo-label").value;
         
-            switch(category) {
-                case "get_courses":
-                    queryParam = "course-name";
-                    break;
-                case "get_Degrees":
-                    queryParam = "degree-name";
-                    break;
-                default:
-                    queryParam = "all-categories";
+            if (searchQuery) {
+                let searchParam = '';
+                switch (searchScope) {
+                    case 'get_courses':
+                        searchParam = `course-name=${searchQuery}`;
+                        break;
+                    case 'get_Degrees':
+                        searchParam = `degree-name=${searchQuery}`;
+                        break;
+                    default:
+                        searchParam = `all-categories=${searchQuery}`;
+                        break;
+                }
+                window.location.href = `/searchresult.html?${searchParam}`;
+            } else {
+                alert("Please enter a search query.");
             }
         
-            window.location.href = `/searchresult.html?${queryParam}=${this.searchQuery}`;
         },
         
         
