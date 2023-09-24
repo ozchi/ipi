@@ -10,6 +10,7 @@ const vuectrl = Vue.createApp({
             level: [],
             course: [],
             degree: [],
+            searchQuery: '',
             degree_course: [],
             type: ["core", "elective","core & elective", "project", "core & project", "elective & project", "core, elective & project"],
             // term: ["", "Semester 1", "Semester 2", "All Semesters", "Trimester 1", "Trimester 2", "Trimester 3", "All Trimesters"],
@@ -41,8 +42,29 @@ const vuectrl = Vue.createApp({
             }
         },
         doSearching() {
-            console.log("Searching...");
-            },
+            console.log("doSearching method called");
+                const query = document.getElementById('search-value').value.toLowerCase();
+            if (!query) {
+                this.errorMessage = "Please enter a search query.";
+                return;
+            }
+
+    
+            const filteredCourses = this.course.filter(c => 
+                c.course_name.toLowerCase().includes(query) || 
+                c.course_code.toLowerCase().includes(query)
+            );
+
+    
+            this.course = filteredCourses;
+
+    
+            if (filteredCourses.length === 0) {
+                this.errorMessage = "No courses found for the given query.";
+            } else {
+                this.errorMessage = null;
+            }
+        },
         doLogin() {
             console.log("login...");
             window.location.href = "login.html";

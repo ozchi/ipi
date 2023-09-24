@@ -53,7 +53,7 @@
                                     <div class="search_icon">
                                         <img class="search_icom_1" src="images/search-icon@2x.png">
                                     </div>
-                                    <input id ="search-value" type="text" name = "searching_value" placeholder="Course Name Or Course Number">                          
+                                    <input v-model="searchQuery" type="text" placeholder="Course Name Or Course Number">                          
                                     </div>
                                 
                                     <div id = "widget_wrapper">
@@ -69,7 +69,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button id="btnSearch" class="button_search" onclick="doSearching()">
+                                    <button id="btnSearch" class="button_search" @click="doSearching()">
                                     <div class="inside_search_button"> Search </div>
                                     </button>
                             </div>
