@@ -28,7 +28,17 @@
                 <div class="button_login"> Login </div>
             </button>
         </nav>
-
+        <div v-for="c in course" :key="c.course_id">
+            <h3>{{ c.course_name }}</h3>
+            <p>{{ c.course_code }}</p>
+            <!-- 其他课程信息 -->
+        </div>
+        <div v-for="d in degree" :key="d.degree_id">
+            <h3>{{ d.degree_name }}</h3>
+            <!-- 其他学位信息 -->
+        </div>
+        
+        
 
 
         <footer class="footer">
