@@ -41,32 +41,26 @@ const vuectrl = Vue.createApp({
                 this.displayCourse = true;
             }
         },
+        
         doSearching() {
-            const query = document.getElementById('search-value').value.toLowerCase();
-            const category = document.getElementById('demo-label').innerText.toLowerCase().replace(' ', '-');
-            
-            if (!query) {
-                this.errorMessage = "Please enter a search query.";
-                return;
+            console.log("Search button clicked!");
+            let category = document.getElementById("cars").value;
+            let queryParam = "";
+        
+            switch(category) {
+                case "get_courses":
+                    queryParam = "course-name";
+                    break;
+                case "get_Degrees":
+                    queryParam = "degree-name";
+                    break;
+                default:
+                    queryParam = "all-categories";
             }
         
-            fetch(`/search?${category}=${query}`)
-                .then(response => response.json())
-                .then(data => {
-                    this.course = data.courses;
-                    this.degree = data.degrees;
-        
-                    if (data.courses.length === 0 && data.degrees.length === 0) {
-                        this.errorMessage = "No results found for the given query.";
-                    } else {
-                        this.errorMessage = null;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching search results:', error);
-                    this.errorMessage = "An error occurred while fetching search results.";
-                });
+            window.location.href = `/searchresult.html?${queryParam}=${this.searchQuery}`;
         },
+        
         
         doLogin() {
             console.log("login...");
