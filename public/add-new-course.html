@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- <link rel="stylesheet" type="text/css" href="../public/css/add-new-course.css"> -->
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="/javascripts/main.js" defer></script>
+        <script src="/javascripts/add_things.js"></script>
+        <meta charset="UTF-8">
+        <title>Add New Course</title>
+    </head>
+    <body>
+        <div id="mainDiv">
+            <!-- hyperlinks to other pages -->
+            <div class="section modal-container header-content">
+                <!-- <a href="/">Home</a> -->
+                <a href="/add-course.html" target="_self">Add Course</a>
+                <a href="/add-new-course.html" target="_self">Add New Course</a>
+                <a href="/add-new-degree.html" target="_self">Add New Degree</a>
+                <a href="/edit-course.html" target="_self">Edit Course</a>
+            </div>
+            <form>
+                <div class="center content">
+                    <!-- Course Code -->
+                    <label for="stream_id">Course code: </label>
+                    <select name="stream" id="stream">
+                        <option v-for="stream in stream" :value="stream.stream_id"> {{ stream.stream_name }}</option>
+                    </select>   
+                    <input type="text" id="course_code">
+                    <br><br>
+                    <!-- Course Name -->
+                    <label for="course_name">Course name: </label>
+                    <input type="text" id="course_name">
+                    <br><br>
+                    <!-- Course Link href -->
+                    <label for="courselink_href">Course Link: </label>
+                    <input type="text" id="courselink_href">
+                    <br><br>
+                    <!-- Units -->
+                    <label for="units"> Units: </label>
+                    <select name="units" id="units">
+                        <option value="3">3</option>
+                        <option value="6">6</option>
+                        <option value="9">9</option>
+                    </select>
+                    <br><br>
+                    <!-- Terms -->
+                    <label for="terms"> Available Term(s): </label>
+                    <select name="terms" id="terms">
+                        <template v-for="term in term">
+                            <option :value="term.t" v-if="term.t > 0"> {{ term.s }}</option>
+                        </template>
+                    </select>
+                    <br><br>
+                    <!-- Pre-requisite -->
+                    <label for="PR_stream_id">Pre-requisite course: </label>
+                    <select name="stream" id="PR_stream_id">
+                        <option v-for="stream in stream" :value="stream.stream_id"> {{ stream.stream_name }}</option>
+                    </select>   
+                    <input type="text" id="PR_course_code">
+                    <br><br>
+                    <!-- Incompatible -->
+                    <label for="IN_stream_id">Incompatible course: </label>
+                    <select name="stream" id="IN_stream_id">
+                        <option v-for="stream in stream" :value="stream.stream_id"> {{ stream.stream_name }}</option>
+                    </select>   
+                    <input type="text" id="IN_course_code">
+                    <br><br>
+                    <!-- Confirm button -->
+                    <button type="button" onclick="addNewCourse()">Add course</button> 
+                    <button type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

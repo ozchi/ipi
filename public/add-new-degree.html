@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="../public/css/add-new-degree.css">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script type="text/javascript" src="js/main.js" defer></script>
+        <meta charset="UTF-8">
+        <title>Add New Degree</title>
+    </head>
+    <body>
+        <!-- hyperlinks to other pages -->
+        <div class="section modal-container header-content">
+            <!-- <a href="/">Home</a> -->
+            <a href="/add-course.html" target="_self">Add Course</a>
+            <a href="/add-new-course.html" target="_self">Add New Course</a>
+            <a href="/add-new-degree.html" target="_self">Add New Degree</a>
+            <a href="/edit-course.html" target="_self">Edit Course</a>
+        </div>
+        <!-- pop up -->
+        <div class="center container popup popupbox">
+            <h2>Add New Degree</h2>
+            <form>
+                <div class="center content">
+                    <!-- Text field -->
+                    <p>Degree name: </p>
+                    <div class="center content">
+                     <input type="text">
+                    </div>
+                    <!-- Bachelor -->
+                    <label>
+                        <p>Bachelor</p><input type="radio"><br>
+                    </label>
+                    <!-- Master -->
+                    <label>
+                        <p>Master</p><input type="radio">
+                    </label><br>
+                <!-- Needs JS to uncheck the radio buttons -->
+                    <!-- Core -->
+                    <label>
+                        <input type="checkbox" value="core">Core
+                    </label><br>
+                    <!-- Elective -->
+                    <label>
+                        <input type="checkbox" value="elective">Elective
+                    </label><br>
+                    <!-- Project -->
+                    <label>
+                        <input type="checkbox" value="project">Project
+                    </label><br>
+                    <button>Confirm</button>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>
