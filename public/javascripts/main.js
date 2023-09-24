@@ -42,29 +42,32 @@ const vuectrl = Vue.createApp({
             }
         },
         doSearching() {
-            console.log("doSearching method called");
-                const query = document.getElementById('search-value').value.toLowerCase();
+            const query = document.getElementById('search-value').value.toLowerCase();
+            const category = document.getElementById('demo-label').innerText.toLowerCase().replace(' ', '-');
+            
             if (!query) {
                 this.errorMessage = "Please enter a search query.";
                 return;
             }
-
-    
-            const filteredCourses = this.course.filter(c => 
-                c.course_name.toLowerCase().includes(query) || 
-                c.course_code.toLowerCase().includes(query)
-            );
-
-    
-            this.course = filteredCourses;
-
-    
-            if (filteredCourses.length === 0) {
-                this.errorMessage = "No courses found for the given query.";
-            } else {
-                this.errorMessage = null;
-            }
+        
+            fetch(`/search?${category}=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    this.course = data.courses;
+                    this.degree = data.degrees;
+        
+                    if (data.courses.length === 0 && data.degrees.length === 0) {
+                        this.errorMessage = "No results found for the given query.";
+                    } else {
+                        this.errorMessage = null;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching search results:', error);
+                    this.errorMessage = "An error occurred while fetching search results.";
+                });
         },
+        
         doLogin() {
             console.log("login...");
             window.location.href = "login.html";
