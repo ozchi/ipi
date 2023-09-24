@@ -23,6 +23,7 @@ connPool.getConnection((err, connection) => {
     }
 });
 
+var searchRouter = require('./routes/searchRoutes');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var apiRoutes = require('./routes/apiRoutes');
@@ -38,7 +39,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/api', searchRouter);
 app.use('/', indexRouter);
 app.use('/api', apiRoutes);
 app.use('/users', usersRouter);

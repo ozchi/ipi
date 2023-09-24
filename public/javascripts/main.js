@@ -43,29 +43,38 @@ const vuectrl = Vue.createApp({
         },
         
         doSearching() {
-            const searchQuery = document.getElementById("searchQuery").value;
+            const searchQuery = this.searchQuery.trim(); 
             const searchScope = document.getElementById("demo-label").value;
-        
             if (searchQuery) {
-                let searchParam = '';
+                let apiUrl = ''; 
+    
                 switch (searchScope) {
                     case 'get_courses':
-                        searchParam = `course-name=${searchQuery}`;
+                        apiUrl = `/api/search?course-name=${searchQuery}`;
                         break;
                     case 'get_Degrees':
-                        searchParam = `degree-name=${searchQuery}`;
+                        apiUrl = `/api/search?degree-name=${searchQuery}`;
                         break;
                     default:
-                        searchParam = `all-categories=${searchQuery}`;
+                        apiUrl = `/api/search?all-categories=${searchQuery}`;
                         break;
                 }
-                window.location.href = `/searchresult.html?${searchParam}`;
-            } else {
-                alert("Please enter a search query.");
-            }
-        
+    
+            
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                    
+                        this.course = data.courses;
+                        this.degree = data.degrees;
+                    })
+                    .catch(error => {
+                        console.error("Error fetching search results:", error);
+                    });
+                } else {
+                    alert("Please enter a search.");
+                }
         },
-        
         
         doLogin() {
             console.log("login...");
